@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% block body %}
+<div class="card class"><h3>{{s.subject}}</h3><div class="meta">{{s.sem}}th Sem · {{s.glabel}} · {{roster}} eligible students<br>Faculty: {{s.faculty}}<br>{{s.session_date}} · Hour {{s.hour_no or '-'}} · {{s.start_time or ''}}–{{s.end_time or ''}}</div><span class="pill p-{{s.status}}" style="align-self:flex-start">{{s.status}}</span></div>
+{% if s.status in ('open','failed') %}
+{% if s.error %}<div class="flash">Error: {{s.error}}</div>{% endif %}
+<div class="card"><b>1 · Upload classroom photos (3–4)</b>
+<form method="post" action="/teacher/attendance/{{s.id}}/upload" enctype="multipart/form-data"><label>Choose photos</label><input type="file" name="photos" accept="image/*" multiple required><input type="hidden" name="run" value="1"><br><button class="btn acc full">UPLOAD &amp; RUN AI</button></form>
+{% if photos %}<div class="photos" style="margin-top:12px">{% for p in photos %}<div><img src="/teacher/files/photo/{{p.id}}" alt=""><div class="note">{{p.filename}}</div>
+<form method="post" action="/teacher/attendance/{{s.id}}/photo/{{p.id}}/delete"><button class="btn danger sm">Remove</button></form></div>{% endfor %}</div>{% endif %}
+<p class="note">{{photos|length}}/4 photos uploaded.</p></div>
+<div class="card"><b>2 · Run AI recognition</b><p class="note">Detects faces, matches them with enrolled students, removes duplicates across photos and checks subject enrollment.</p>
+<button id="go" class="btn acc full" {{'disabled' if photos|length<3}}>RUN AI PROCESSING</button><div id="err" class="note" style="color:var(--bad)"></div></div>
+{% endif %}
+<div class="card" id="pipecard" {{'hidden' if s.status not in ('processing','review')}}><b>AI processing</b><div class="bar"><i id="bar"></i></div>
+<ul class="pipe" id="pipe">{% for st in stages %}<li id="st{{loop.index}}"><span class="dot">{{loop.index}}</span>{{st}}</li>{% endfor %}</ul><div id="msg" class="note"></div>
+<a id="next" class="btn acc full" style="margin-top:10px" href="/teacher/attendance/{{s.id}}/review" {{'hidden' if s.status!='review'}}>OPEN TEACHER REVIEW →</a></div>
+{% if s.status=='finalized' %}<a class="btn full" href="/teacher/attendance/{{s.id}}/review">View finalized attendance</a>{% endif %}
+<script>
+const SID={{s.id}},N={{stages|length}};let timer;
+function paint(d){const c=document.getElementById('pipecard');c.hidden=false;
+ for(let i=1;i<=N;i++){const li=document.getElementById('st'+i);li.className=(d.status==='review'||i<d.stage)?'done':(i===d.stage?'cur':'');li.querySelector('.dot').textContent=(li.className==='done')?'✓':i}
+ document.getElementById('bar').style.width=((d.status==='review'?N:d.stage-1+0.5)/N*100)+'%';document.getElementById('msg').textContent=d.msg||'';
+ if(d.status==='review'){clearInterval(timer);document.getElementById('next').hidden=false;setTimeout(()=>location.href='/teacher/attendance/'+SID+'/review',1200)}
+ if(d.status==='failed'){clearInterval(timer);document.getElementById('msg').textContent='Failed: '+d.error}}
+async function poll(){const r=await fetch('/teacher/attendance/'+SID+'/status');paint(await r.json())}
+const go=document.getElementById('go');
+if(go)go.onclick=async()=>{go.disabled=true;const r=await fetch('/teacher/attendance/'+SID+'/process',{method:'POST'});const j=await r.json();
+ if(!r.ok){document.getElementById('err').textContent=j.error;go.disabled=false;return}timer=setInterval(poll,800);poll()};
+if(go&&location.search.includes('autorun=1')&&!go.disabled)go.click();
+{% if s.status=='processing' %}timer=setInterval(poll,800);poll();{% elif s.status=='review' %}poll();{% endif %}
+</script>{% endblock %}

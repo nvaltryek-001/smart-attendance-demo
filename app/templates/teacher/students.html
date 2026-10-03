@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block body %}<h1>My students</h1>
+<form class="card" method="get"><label>Class</label><select name="group" onchange="this.form.submit()">{% for a in asg %}<option value="{{a.group_id}}" {{'selected' if a.group_id==gid}}>{{a.subject}} — {{a.label}} ({{a.n}})</option>{% endfor %}</select></form>
+<p class="note">Only students enrolled in your assigned classes are shown.</p>
+<table class="rt"><thead><tr><th>Sl</th><th>USN</th><th>Name</th><th>Section</th><th>Face</th></tr></thead><tbody>{% for r in rows %}<tr><td data-l="Sl">{{loop.index}}</td><td data-l="USN">{{r.usn}}</td><td data-l="Name">{{r.name}}</td><td data-l="Section">{{r.sec}}</td><td data-l="Face">{{'✔' if r.face else '—'}}</td></tr>{% endfor %}</tbody></table>{% endblock %}

@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}Smart Attendance{% endblock %} · DEMO</title><link rel="stylesheet" href="/static/style.css"></head><body>
+{% if demo %}<div class="demo-bar">DEMO MODE — synthetic demo students · not real college data</div>{% endif %}
+<header class="top"><div class="brand">{{ college }}<small>Smart Attendance System</small></div>
+{% if me %}<div class="who">{{ me.full_name }}<br><a href="/logout">Log out</a></div>{% endif %}</header>
+{% if me and me.role=='admin' %}<nav class="tabs">
+{% for h,l,k in [('/admin/dashboard','Dashboard','dashboard'),('/admin/students','Students','students'),('/admin/students/enrollment','Enrollment','enroll'),('/admin/face-enrollment','Faces','face'),('/admin/subjects','Subjects','subjects'),('/admin/subject-groups','Groups','groups'),('/admin/teachers','Teachers','teachers'),('/admin/teacher-assignments','Assign','assign'),('/admin/timetable','Timetable','tt')] %}<a href="{{h}}" class="{{'on' if nav==k}}">{{l}}</a>{% endfor %}</nav>
+{% elif me and me.role=='teacher' %}<nav class="tabs">
+{% for h,l,k in [('/teacher/dashboard','Today','dash'),('/teacher/classes','Classes','classes'),('/teacher/students','Students','students'),('/teacher/reports','Reports','reports'),('/teacher/profile','Profile','profile')] %}<a href="{{h}}" class="{{'on' if nav==k}}">{{l}}</a>{% endfor %}</nav>{% endif %}
+<main>{% with m=get_flashed_messages() %}{% for x in m %}<div class="flash">{{x}}</div>{% endfor %}{% endwith %}{% block body %}{% endblock %}</main></body></html>

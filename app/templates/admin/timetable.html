@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block body %}<h1>Timetable</h1>
+<details class="card"><summary>+ Add slot</summary><form method="post"><label>Assignment</label><select name="assignment_id">{% for a in asg %}<option value="{{a.id}}">{{a.n}}</option>{% endfor %}</select>
+<label>Days</label><select name="weekday" multiple size="7">{% for d in days %}<option value="{{loop.index0}}" {{'selected' if loop.index0<5}}>{{d}}</option>{% endfor %}</select>
+<div class="row"><div><label>Hour no.</label><input name="hour_no" type="number" value="1" min="1" max="8"></div><div><label>Start</label><input name="start_time" value="09:00"></div><div><label>End</label><input name="end_time" value="10:00"></div></div><br><button class="btn acc full">Add</button></form></details>
+<table class="rt"><thead><tr><th>Day</th><th>Hour</th><th>Time</th><th>Subject</th><th>Teacher</th><th></th></tr></thead><tbody>{% for r in rows %}<tr><td data-l="Day">{{days[r.weekday]}}</td><td data-l="Hour">{{r.hour_no}}</td><td data-l="Time">{{r.start_time}}–{{r.end_time}}</td><td data-l="Subject">{{r.subject}} ({{r.label}})</td><td data-l="Teacher">{{r.teacher}}</td>
+<td class="nl"><form method="post"><input type="hidden" name="delete" value="{{r.id}}"><button class="btn danger sm">×</button></form></td></tr>{% endfor %}</tbody></table>{% endblock %}

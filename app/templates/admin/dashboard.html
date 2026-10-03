@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block body %}<h1>Admin dashboard</h1>
+<div class="grid">{% for k,v in stats.items() %}<div class="stat"><b>{{v}}</b><span>{{k}}</span></div>{% endfor %}</div>
+<h2>Recent attendance sessions</h2>
+<table class="rt"><thead><tr><th>#</th><th>Date</th><th>Subject</th><th>Faculty</th><th>Status</th></tr></thead><tbody>
+{% for r in recent %}<tr><td data-l="#">{{r.id}}</td><td data-l="Date">{{r.session_date}}</td><td data-l="Subject">{{r.subject}}</td><td data-l="Faculty">{{r.faculty}}</td><td data-l="Status"><span class="pill p-{{r.status}}">{{r.status}}</span></td></tr>
+{% else %}<tr><td colspan="5">No sessions yet.</td></tr>{% endfor %}</tbody></table>{% endblock %}

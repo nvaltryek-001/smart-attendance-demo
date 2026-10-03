@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<h1>Reports</h1>
+{% for r in rows %}<div class="card" {{'style="border-color:var(--acc)"'|safe if hl==r.id|string}}><b>{{r.subject}}</b> · {{r.label}}<br><span class="note">{{r.session_date}} · Hour {{r.hour_no}} · Present {{r.p}} · Absent {{r.a}} · Other class {{r.o}}</span>
+<div class="row" style="margin-top:10px"><a class="btn sm" href="/teacher/files/report/{{r.id}}/attendance.pdf" target="_blank">📄 Attendance PDF</a>
+<a class="btn ghost sm" href="/teacher/files/report/{{r.id}}/other_class.pdf" target="_blank">🟠 Other-class PDF</a><a class="btn ghost sm" href="/teacher/files/report/{{r.id}}/attendance.pdf?dl=1">⬇ Download</a></div></div>
+{% else %}<div class="card">No finalized sessions yet.</div>{% endfor %}{% endblock %}

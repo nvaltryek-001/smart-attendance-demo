@@ -1,0 +1,23 @@
+# ---- PRIVATE / LOCAL ONLY: never commit ----
+# LFW-derived face gallery, classroom images, manifest:
+demo_assets/
+# SQLite DB, uploaded photos, generated PDFs, face embeddings:
+data/
+lfw_src/
+_lfw/
+*.sqlite3
+*.sqlite3-*
+*.onnx
+*.pkl
+.insightface/
+.env
+.env.*
+!.env.example
+# ---- Python / tooling ----
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+.vercel/
+node_modules/

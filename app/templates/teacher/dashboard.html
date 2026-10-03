@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block body %}<h1>Today's classes <span class="note">{{ today.strftime('%a %d %b') }}</span></h1>
+{% for c in classes %}<div class="card class"><h3>{{c.subject}}</h3><div class="meta">{{c.sem}}th Sem · {{c.label}}<br>{{c.hour_no}}{{ {1:'st',2:'nd',3:'rd'}.get(c.hour_no,'th') }} Hour · {{c.start_time}}–{{c.end_time}}</div>
+<form method="post" action="/teacher/classes/start"><input type="hidden" name="assignment_id" value="{{c.aid}}"><input type="hidden" name="timetable_id" value="{{c.ttid}}"><button class="btn acc full">START ATTENDANCE</button></form></div>
+{% else %}<div class="card">No classes scheduled today. <a href="/teacher/classes">See all assigned classes</a>.</div>{% endfor %}
+<h2>Today's totals</h2><div class="grid g4"><div class="stat"><b>{{ tot.p or 0 }}</b><span>Present</span></div><div class="stat"><b>{{ tot.a or 0 }}</b><span>Absent</span></div><div class="stat"><b>{{ tot.r or 0 }}</b><span>Review</span></div><div class="stat"><b>{{ tot.o or 0 }}</b><span>Other class</span></div></div>
+<h2>Current sessions</h2>{% for s in sessions %}<a class="card tcard" style="text-decoration:none" href="/teacher/attendance/{{s.id}}{{'/review' if s.status=='review'}}"><div style="flex:1"><b>{{s.subject}}</b> · {{s.label}}<br><span class="note">{{s.session_date}}</span></div><span class="pill p-{{s.status}}">{{s.status}}</span></a>
+{% else %}<p class="note">No open sessions.</p>{% endfor %}{% endblock %}

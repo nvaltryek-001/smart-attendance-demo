@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block body %}<h1>Subject / elective groups</h1>
+<details class="card"><summary>+ Create group</summary><form method="post"><label>Subject</label><select name="subject_id">{% for s in subjects %}<option value="{{s.id}}">{{s.name}}</option>{% endfor %}</select>
+<label>Group name</label><input name="name" placeholder="Cloud Elective A+B" required><label>Label shown to teacher</label><input name="label" placeholder="A+B" required><br><button class="btn acc full">Create</button></form></details>
+{% for r in rows %}<div class="card"><b>{{r.subject}}</b> — {{r.name}}<br><span class="note">Label: {{r.label}} · {{r.n}} students</span>
+<div class="row" style="margin-top:8px"><a class="btn ghost sm" href="/admin/students/enrollment?group={{r.id}}">Manage students</a>
+<form method="post" onsubmit="return confirm('Delete group?')"><input type="hidden" name="delete" value="{{r.id}}"><button class="btn danger sm">Delete</button></form></div></div>{% endfor %}{% endblock %}

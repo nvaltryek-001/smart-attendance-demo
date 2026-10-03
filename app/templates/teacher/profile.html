@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block body %}<h1>Profile</h1><div class="card"><b>{{t.full_name}}</b><br>{{t.email}}<br><span class="note">{{t.designation}} · CSE – Data Science</span></div>
+<h2>Assigned classes</h2>{% for a in asg %}<div class="card">{{a.subject}} · {{a.sem}}th Sem · {{a.label}}</div>{% endfor %}<a class="btn danger full" href="/logout">Log out</a>{% endblock %}

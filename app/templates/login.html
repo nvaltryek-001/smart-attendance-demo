@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<h1>{{ role|capitalize }} login</h1>
+<form class="card" method="post"><label>Email</label><input name="email" type="email" autocomplete="username" value="{{ role }}.demo@college.edu" required>
+<label>Password</label><input name="password" type="password" autocomplete="current-password" required>
+<p class="note">Demo password: {{ 'Admin@12345' if role=='admin' else 'Demo@12345' }}</p><button class="btn acc full">Log in</button></form>
+<p class="note"><a href="/">← Home</a> · <a href="/{{ 'teacher' if role=='admin' else 'admin' }}/login">{{ 'Teacher' if role=='admin' else 'Admin' }} login</a></p>{% endblock %}

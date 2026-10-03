@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<h1>🟠 Other-class detections</h1><p class="note">{{s.subject}} · {{s.glabel}} · students recognised but not enrolled in this subject. They are never counted absent.</p>
+{% for r in rows %}<div class="card tcard">{% if r.crop_path %}<img class="thumb" style="width:72px;height:72px" src="/teacher/files/crop/{{r.record_id}}">{% endif %}<div style="flex:1"><b>{{r.name}}</b><br><span class="note">{{r.usn}} · Sem {{r.sem}} · Section {{r.sec}} · {{'%.0f'|format(r.confidence)}}%</span></div></div>
+{% else %}<div class="card">None detected.</div>{% endfor %}
+{% if rep %}<a class="btn acc full" href="/teacher/files/report/{{s.id}}/other_class.pdf" target="_blank">Open Other-Class PDF</a>{% else %}<p class="note">The Other-Class PDF is generated when you finalize attendance.</p>{% endif %}
+<p><a href="/teacher/attendance/{{s.id}}/review">← Back to review</a></p>{% endblock %}

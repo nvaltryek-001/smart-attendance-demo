@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block body %}
+<div class="hero"><h1>Smart College Attendance</h1><p>Face-recognition attendance with teacher review. Demo build for {{ college }} · CSE – Data Science · 7th Sem.</p>
+<a class="btn acc" href="/teacher/login">Teacher login</a><a class="btn ghost" href="/admin/login">Admin login</a></div>
+<div class="card"><b>Demo accounts</b><p class="note">Admin: <code>admin.demo@college.edu</code> / <code>Admin@12345</code><br>Teacher: <code>teacher.demo@college.edu</code> / <code>Demo@12345</code></p></div>
+{% if files %}<div class="card"><b>Demo classroom photos</b><p class="note">Save these to your phone, then upload them during the teacher attendance flow.</p>
+<div class="photos">{% for f in files %}<div><img src="/demo/classroom/{{f}}" loading="lazy" alt="{{f}}"><a class="btn ghost sm full" style="margin-top:6px" href="/demo/classroom/{{f}}?dl=1" download>⬇ {{f}}</a></div>{% endfor %}</div>
+<p class="note">These are controlled composite images built from the LFW research dataset (public figures). They are not real classroom photos.</p></div>{% endif %}
+{% endblock %}

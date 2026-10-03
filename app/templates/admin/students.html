@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block body %}<h1>Students <span class="note">({{total}})</span></h1>
+<form class="card row" method="get"><div><label>Search</label><input name="q" value="{{s}}" placeholder="USN or name"></div>
+<div><label>Section</label><select name="section"><option value="">All</option>{% for x in sections %}<option {{'selected' if sec==x.name}}>{{x.name}}</option>{% endfor %}</select></div><button class="btn">Filter</button></form>
+<details class="card" {{'open' if edit}}><summary>{{ 'Edit student' if edit else '+ Add demo student' }}</summary>
+<form method="post" action="/admin/students/save">{% if edit %}<input type="hidden" name="id" value="{{edit.id}}">{% endif %}
+<label>USN</label><input name="usn" value="{{edit.usn if edit}}" required><label>Name</label><input name="name" value="{{edit.name if edit}}" required>
+<label>Section</label><select name="section_id">{% for x in sections %}<option value="{{x.id}}" {{'selected' if edit and edit.section_id==x.id}}>{{x.name}}</option>{% endfor %}</select><br><button class="btn acc full">Save</button></form></details>
+<table class="rt"><thead><tr><th>USN</th><th>Name</th><th>Section</th><th>Face</th><th></th></tr></thead><tbody>
+{% for r in rows %}<tr><td data-l="USN">{{r.usn}}</td><td data-l="Name">{{r.name}}</td><td data-l="Section">{{r.sec}}</td><td data-l="Face">{{'✔ enrolled' if r.face else '—'}}</td><td class="nl"><a class="btn ghost sm" href="/admin/students?edit={{r.id}}">Edit</a></td></tr>{% endfor %}</tbody></table>
+<p>{% if page>1 %}<a class="btn ghost sm" href="?page={{page-1}}&q={{s}}&section={{sec}}">← Prev</a>{% endif %} <span class="note">Page {{page}} of {{ ((total-1)//per)+1 }}</span>
+{% if page*per<total %}<a class="btn ghost sm" href="?page={{page+1}}&q={{s}}&section={{sec}}">Next →</a>{% endif %}</p>{% endblock %}

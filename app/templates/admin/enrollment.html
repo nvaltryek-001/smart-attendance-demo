@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block body %}<h1>Subject enrollment</h1>
+<form class="card" method="get"><label>Subject group</label><select name="group" onchange="this.form.submit()">{% for g in groups %}<option value="{{g.id}}" {{'selected' if g.id==gid}}>{{g.subject}} — {{g.name}} ({{g.n}})</option>{% endfor %}</select></form>
+{% if gid %}<div class="card"><b>Add students</b>
+<form method="post" action="/admin/students/enrollment/update" class="row"><input type="hidden" name="group_id" value="{{gid}}"><input type="hidden" name="action" value="add_section">
+<div><label>Whole section</label><select name="section_id">{% for s in sections %}<option value="{{s.id}}">Section {{s.name}}</option>{% endfor %}</select></div><button class="btn acc">Add section</button></form>
+<form method="post" action="/admin/students/enrollment/update" class="row"><input type="hidden" name="group_id" value="{{gid}}"><input type="hidden" name="action" value="add_range">
+<div><label>From USN</label><input name="from_usn" placeholder="01DEMO23DS001"></div><div><label>To USN</label><input name="to_usn" placeholder="01DEMO23DS020"></div><button class="btn">Add range</button></form>
+<form method="post" action="/admin/students/enrollment/update" class="row"><input type="hidden" name="group_id" value="{{gid}}"><input type="hidden" name="action" value="clear_section">
+<div><label>Remove whole section</label><select name="section_id">{% for s in sections %}<option value="{{s.id}}">Section {{s.name}}</option>{% endfor %}</select></div><button class="btn danger">Remove</button></form></div>
+<h2>Enrolled ({{members|length}})</h2>
+<table class="rt"><thead><tr><th>USN</th><th>Name</th><th>Section</th><th></th></tr></thead><tbody>{% for m in members %}<tr><td data-l="USN">{{m.usn}}</td><td data-l="Name">{{m.name}}</td><td data-l="Section">{{m.sec}}</td>
+<td class="nl"><form method="post" action="/admin/students/enrollment/update"><input type="hidden" name="group_id" value="{{gid}}"><input type="hidden" name="action" value="remove"><input type="hidden" name="student_id" value="{{m.id}}"><button class="btn danger sm">Remove</button></form></td></tr>{% endfor %}</tbody></table>{% endif %}{% endblock %}

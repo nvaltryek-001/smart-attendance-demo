@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block body %}<h1>Teachers</h1>
+<details class="card"><summary>+ Add teacher</summary><form method="post"><label>Full name</label><input name="name" required><label>Email</label><input name="email" type="email" required>
+<label>Password</label><input name="password" required minlength="8"><label>Designation</label><input name="designation" value="Assistant Professor"><br><button class="btn acc full">Add</button></form></details>
+<table class="rt"><thead><tr><th>Name</th><th>Email</th><th>Designation</th><th>Assignments</th></tr></thead><tbody>{% for r in rows %}<tr><td data-l="Name">{{r.full_name}}</td><td data-l="Email">{{r.email}}</td><td data-l="Role">{{r.designation}}</td><td data-l="Assigned">{{r.n}}</td></tr>{% endfor %}</tbody></table>{% endblock %}

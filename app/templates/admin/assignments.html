@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<h1>Teacher assignments</h1>
+<form class="card" method="post"><label>Teacher</label><select name="teacher_id">{% for t in teachers %}<option value="{{t.id}}">{{t.full_name}}</option>{% endfor %}</select>
+<label>Subject group</label><select name="group_id">{% for g in groups %}<option value="{{g.id}}">{{g.n}}</option>{% endfor %}</select><br><button class="btn acc full">Assign</button></form>
+{% for r in rows %}<div class="card tcard"><div style="flex:1"><b>{{r.teacher}}</b><br>{{r.subject}} · {{r.label}}</div>
+<form method="post"><input type="hidden" name="delete" value="{{r.id}}"><button class="btn danger sm">Remove</button></form></div>{% endfor %}{% endblock %}

@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<h1>My assigned classes</h1>
+{% for a in asg %}<div class="card class"><h3>{{a.subject}}</h3><div class="meta">{{a.sem}}th Sem · {{a.label}} · {{a.n}} students</div>
+<div class="note">{% for t in tts if t.aid==a.id %}{{days[t.weekday]}} H{{t.hour_no}} {{t.start_time}}–{{t.end_time}}{{ ' · ' if not loop.last }}{% endfor %}</div>
+<form method="post" action="/teacher/classes/start"><input type="hidden" name="assignment_id" value="{{a.id}}"><button class="btn acc full">START ATTENDANCE</button></form></div>
+{% else %}<div class="card">No classes assigned to you.</div>{% endfor %}{% endblock %}

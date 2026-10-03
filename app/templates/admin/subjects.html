@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block body %}<h1>Subjects</h1>
+<details class="card"><summary>+ Add subject</summary><form method="post"><label>Code</label><input name="code" required><label>Name</label><input name="name" required>
+<label>Semester</label><select name="semester"><option>7</option></select><label>Type</label><select name="kind"><option value="core">Core</option><option value="elective">Elective</option></select><br><button class="btn acc full">Add</button></form></details>
+<table class="rt"><thead><tr><th>Code</th><th>Subject</th><th>Sem</th><th>Type</th><th>Groups</th></tr></thead><tbody>{% for r in rows %}<tr><td data-l="Code">{{r.code}}</td><td data-l="Subject">{{r.name}}</td><td data-l="Sem">{{r.sem}}</td><td data-l="Type">{{r.kind}}</td><td data-l="Groups">{{r.ng}}</td></tr>{% endfor %}</tbody></table>{% endblock %}

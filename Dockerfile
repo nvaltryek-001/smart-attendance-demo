@@ -4,8 +4,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends libglib2.0-0 li
 WORKDIR /srv
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-# Download the buffalo_s model (SCRFD + ArcFace) at build time so first request is fast. Needs internet during build.
-RUN python -c "from insightface.app import FaceAnalysis; a=FaceAnalysis(name='buffalo_s',providers=['CPUExecutionProvider'],allowed_modules=['detection','recognition']); a.prepare(ctx_id=-1,det_size=(320,320))"
+# Download the buffalo_sc model (SCRFD + ArcFace) at build time so first request is fast. Needs internet during build.
+RUN python -c "from insightface.app import FaceAnalysis; a=FaceAnalysis(name='buffalo_sc',providers=['CPUExecutionProvider'],allowed_modules=['detection','recognition']); a.prepare(ctx_id=-1,det_size=(320,320))"
 COPY app ./app
 COPY scripts ./scripts
 COPY wsgi.py .

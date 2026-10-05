@@ -2,7 +2,7 @@
 import os, threading
 import numpy as np, cv2
 
-MODEL_NAME = os.environ.get("FACE_MODEL", "buffalo_s")
+MODEL_NAME = os.environ.get("FACE_MODEL", "buffalo_sc")
 DET_SIZE = int(os.environ.get("DET_SIZE", "320"))
 
 # similarity thresholds (cosine on L2-normalised ArcFace embeddings)

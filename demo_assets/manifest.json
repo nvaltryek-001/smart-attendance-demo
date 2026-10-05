@@ -1,0 +1,50 @@
+{
+ "photos": {
+  "classroom_01.jpg": [
+   "01DEMO23DS001",
+   "01DEMO23DS002",
+   "01DEMO23DS003",
+   "01DEMO23DS004",
+   "01DEMO23DS005",
+   "01DEMO23DS006",
+   "01DEMO23DS007",
+   "01DEMO23DS008",
+   "01DEMO23DS065",
+   "S1"
+  ],
+  "classroom_02.jpg": [
+   "01DEMO23DS005",
+   "01DEMO23DS006",
+   "01DEMO23DS007",
+   "01DEMO23DS008",
+   "01DEMO23DS009",
+   "01DEMO23DS010",
+   "01DEMO23DS011",
+   "01DEMO23DS012",
+   "01DEMO23DS066"
+  ],
+  "classroom_03.jpg": [
+   "01DEMO23DS009",
+   "01DEMO23DS010",
+   "01DEMO23DS011",
+   "01DEMO23DS012",
+   "01DEMO23DS013",
+   "01DEMO23DS014",
+   "01DEMO23DS015",
+   "01DEMO23DS067"
+  ],
+  "classroom_04.jpg": [
+   "01DEMO23DS013",
+   "01DEMO23DS014",
+   "01DEMO23DS015",
+   "01DEMO23DS001",
+   "01DEMO23DS002",
+   "01DEMO23DS004",
+   "01DEMO23DS005",
+   "01DEMO23DS065",
+   "S2"
+  ]
+ },
+ "review_student": "01DEMO23DS003",
+ "source": "LFW via https://github.com/redwankarimsony/deepfunneled_lfw.git"
+}

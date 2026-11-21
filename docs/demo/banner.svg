@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Smart College Attendance – AI-powered classroom attendance using face recognition">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a2a1a"/>
+      <stop offset="0.45" stop-color="#13213c"/>
+      <stop offset="1" stop-color="#0a2a3a"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" x2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#ffb35c">
+        <animate attributeName="stop-color" values="#ffb35c;#4fd1e8;#ffb35c" dur="6s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffdcb4" stroke-opacity="0.07"/>
+    </pattern>
+    <style>
+      .t{font-family:'Segoe UI',Inter,Helvetica,Arial,sans-serif}
+      .box{fill:none;stroke-width:3;stroke-dasharray:180;stroke-dashoffset:180;animation:draw 4s ease-out infinite}
+      @keyframes draw{0%{stroke-dashoffset:180;opacity:0}10%{opacity:1}30%,85%{stroke-dashoffset:0;opacity:1}100%{opacity:0}}
+      .lbl{opacity:0;animation:lbl 4s ease-out infinite}
+      @keyframes lbl{0%,30%{opacity:0}40%,85%{opacity:1}100%{opacity:0}}
+      .d1{animation-delay:.4s}.d2{animation-delay:.8s}.d3{animation-delay:1.2s}.d4{animation-delay:1.6s}
+      .scan{animation:scan 2.6s ease-in-out infinite alternate}
+      @keyframes scan{from{transform:translateX(0)}to{transform:translateX(330px)}}
+    </style>
+  </defs>
+  <rect width="1200" height="300" rx="22" fill="url(#bg)"/>
+  <rect width="1200" height="300" rx="22" fill="url(#grid)"/>
+
+  <!-- logo + title -->
+  <rect x="62" y="64" width="66" height="66" rx="16" fill="#e07a00"/>
+  <circle cx="88" cy="88" r="12" fill="none" stroke="#fff" stroke-width="4"/>
+  <path d="M70 124 q18 -22 36 0" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M104 106 l6 6 l11 -13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="t" x="146" y="110" font-size="42" font-weight="800" fill="url(#title)">Smart College Attendance</text>
+  <text class="t" x="64" y="168" font-size="20" font-weight="600" fill="#f0ece2">AI-powered classroom attendance using face recognition</text>
+  <text class="t" x="64" y="198" font-size="15" fill="#a0aabe">3–4 photos → recognise → merge → roster check → teacher review → PDF</text>
+  <g class="t" font-size="13" font-weight="700" text-anchor="middle">
+    <rect x="64" y="222" width="100" height="30" rx="15" fill="#50af28"/><text x="114" y="242" fill="#fff">PRESENT</text>
+    <rect x="174" y="222" width="94" height="30" rx="15" fill="#00aad2"/><text x="221" y="242" fill="#fff">REVIEW</text>
+    <rect x="278" y="222" width="124" height="30" rx="15" fill="#e07a00"/><text x="340" y="242" fill="#fff">OTHER CLASS</text>
+    <rect x="412" y="222" width="108" height="30" rx="15" fill="#969ba5"/><text x="466" y="242" fill="#fff">UNKNOWN</text>
+  </g>
+
+  <!-- stylised classroom with detection boxes -->
+  <rect x="780" y="56" width="360" height="200" rx="14" fill="#efe9dc"/>
+  <rect x="800" y="70" width="320" height="34" rx="4" fill="#2f5d3a"/>
+  <rect x="780" y="200" width="360" height="12" fill="#b9a27c"/>
+  <g fill="#7a8aa6">
+    <circle cx="830" cy="150" r="16"/><path d="M808 196 q22 -30 44 0z"/>
+    <circle cx="900" cy="140" r="16"/><path d="M878 186 q22 -30 44 0z"/>
+    <circle cx="970" cy="152" r="16"/><path d="M948 198 q22 -30 44 0z"/>
+    <circle cx="1040" cy="142" r="16"/><path d="M1018 188 q22 -30 44 0z"/>
+    <circle cx="1100" cy="154" r="15"/><path d="M1080 198 q20 -28 40 0z"/>
+  </g>
+  <rect class="box" x="810" y="130" width="40" height="40" rx="5" stroke="#50af28"/>
+  <rect class="box d1" x="880" y="120" width="40" height="40" rx="5" stroke="#50af28"/>
+  <rect class="box d2" x="950" y="132" width="40" height="40" rx="5" stroke="#00aad2"/>
+  <rect class="box d3" x="1020" y="122" width="40" height="40" rx="5" stroke="#e07a00"/>
+  <rect class="box d4" x="1082" y="136" width="36" height="36" rx="5" stroke="#969ba5"/>
+  <g class="t lbl" font-size="10" font-weight="700" fill="#fff">
+    <rect x="806" y="114" width="48" height="14" rx="3" fill="#50af28"/><text x="830" y="125" text-anchor="middle">001 ✓</text>
+  </g>
+  <g class="t lbl d1" font-size="10" font-weight="700" fill="#fff">
+    <rect x="876" y="104" width="48" height="14" rx="3" fill="#50af28"/><text x="900" y="115" text-anchor="middle">002 ✓</text>
+  </g>
+  <g class="t lbl d2" font-size="10" font-weight="700" fill="#fff">
+    <rect x="946" y="116" width="48" height="14" rx="3" fill="#00aad2"/><text x="970" y="127" text-anchor="middle">003 ?</text>
+  </g>
+  <g class="t lbl d3" font-size="10" font-weight="700" fill="#fff">
+    <rect x="1012" y="106" width="56" height="14" rx="3" fill="#e07a00"/><text x="1040" y="117" text-anchor="middle">065 other</text>
+  </g>
+  <g class="scan"><rect x="780" y="56" width="4" height="200" fill="#ffb35c" opacity=".7"/><rect x="784" y="56" width="26" height="200" fill="#ffb35c" opacity=".12"/></g>
+  <rect x="780" y="56" width="360" height="200" rx="14" fill="none" stroke="#e07a00" stroke-opacity=".7"/>
+</svg>
